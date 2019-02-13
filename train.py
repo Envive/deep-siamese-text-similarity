@@ -39,7 +39,7 @@ tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device 
 tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
 
 FLAGS = tf.flags.FLAGS
-FLAGS._parse_flags()
+FLAGS.flag_values_dict()
 print("\nParameters:")
 for attr, value in sorted(FLAGS.__flags.items()):
     print("{}={}".format(attr.upper(), value))
@@ -200,7 +200,7 @@ with tf.Graph().as_default():
         time_str = datetime.datetime.now().isoformat()
         print("TRAIN {}: step {}, loss {:g}, acc {:g}".format(time_str, step, loss, accuracy))
         train_summary_writer.add_summary(summaries, step)
-        print(y_batch, dist, sim)
+        # print(y_batch, dist, sim)
 
     def dev_step(x1_batch, x2_batch, y_batch):
         """
@@ -224,7 +224,7 @@ with tf.Graph().as_default():
         time_str = datetime.datetime.now().isoformat()
         print("DEV {}: step {}, loss {:g}, acc {:g}".format(time_str, step, loss, accuracy))
         dev_summary_writer.add_summary(summaries, step)
-        print (y_batch, sim)
+        # print (y_batch, sim)
         return accuracy
 
     # Generate batches
